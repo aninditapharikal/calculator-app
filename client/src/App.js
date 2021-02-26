@@ -21,7 +21,6 @@ class App extends Component {
     super(props);
   }
 
-  //to fetch all data while loading the
   componentDidMount() {
     socket.on(
       "render",
@@ -34,11 +33,24 @@ class App extends Component {
   }
 
   addToInput = val => {
-    console.log(this.state.input);
     let lastChar = this.state.input.toString().charAt(this.state.input.length - 1);
-    console.log(lastChar);
-    if ((lastChar === "/" || lastChar === "*" || lastChar === "+" || lastChar === "-") && (val === "/" || val === "*"))
+    if ((lastChar === "+" || lastChar === "-") && (val === "/" || val === "*"))
       return;
+    else if (lastChar === "/") {
+      if (val === "*") {
+        let substr = this.state.input.toString().slice(0, -1);
+        this.setState({ input: substr + val });
+        return;
+      } else if (val === "/") return;
+
+    } else if (lastChar === "*") {
+      if (val === "/") {
+        let substr = this.state.input.toString().slice(0, -1);
+        this.setState({ input: substr + val });
+        return;
+      } else if (val === "*") return;
+
+    }
     this.setState({ input: this.state.input + val });
   }
   _handleKeyDown = (event) => {
@@ -73,7 +85,6 @@ class App extends Component {
     let lastChar = this.state.input.toString().charAt(this.state.input.length - 1);
     if (lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/" || lastChar === ".") return;
     try {
-      console.log(this.state.input);
       if (!this.state.input) return;
       value = math.evaluate(this.state.input);
     } catch (err) {
