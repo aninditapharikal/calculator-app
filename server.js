@@ -26,7 +26,7 @@ app.post('/', (req,res) => {
 
 var cors = require('cors');
 //app.options('*', cors());
-const whitelist = ["http://localhost:3000","http://localhost:4000/"]
+const whitelist = ["http://localhost:3000","http://localhost:4000/","https://app-calculator-anind.herokuapp.com/"]
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("** Origin of request " + origin)
