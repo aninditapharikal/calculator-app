@@ -7,7 +7,7 @@ import * as math from "mathjs";
 import { Container } from 'reactstrap';
 
 const io = require("socket.io-client");
-const socket = io("http://localhost:4000/");
+const socket = io();
 class App extends Component{
   constructor(props){
     super(props);
