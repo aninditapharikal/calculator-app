@@ -44,7 +44,7 @@ app.use(cors(corsOptions))
 //WebSocket
 const io = require('socket.io')(server,{
     cors: {
-                origin: ["http://localhost:4000"],
+                origin: ["http://localhost:3000"],
                 methods: ["GET", "POST"],
                 credentials: true,
                 transports: ['websocket', 'polling'],
