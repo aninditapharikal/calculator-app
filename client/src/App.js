@@ -4,10 +4,10 @@ import { Button } from "./components/Button";
 import {Input} from './components/Input';
 import Data from "./components/Data";
 import * as math from "mathjs";
-import io from "socket.io-client";
 import { Container } from 'reactstrap';
 
-const socket = io.connect('http://localhost:4000');
+const io = require("socket.io-client");
+const socket = io("http://localhost:4000/");
 class App extends Component{
   constructor(props){
     super(props);
@@ -18,6 +18,7 @@ class App extends Component{
     socket.on(
 			"render",
 			(msg) => {
+        console.log("Listening to client side---------------------");
 				this.getAllData();
 			}
 		);
@@ -79,8 +80,8 @@ send = () => {
 };
 render(){
   const overrideStyle={
-    "margin-right": "0px",
-    "margin-left": "0px"
+    "marginRight": "0px",
+    "marginLeft": "0px"
   }
     return (
     <Container className="themed-container">

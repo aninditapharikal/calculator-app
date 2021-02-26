@@ -25,7 +25,7 @@ app.post('/', (req,res) => {
 })
 
 var cors = require('cors');
-//app.options('*', cors());
+app.options('*', cors());
 const whitelist = ["http://localhost:3000","http://localhost:4000/","https://app-calculator-anind.herokuapp.com/"]
 const corsOptions = {
   origin: function (origin, callback) {
@@ -42,17 +42,16 @@ const corsOptions = {
 app.use(cors(corsOptions))
 //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 //WebSocket
-const io = require('socket.io')(server,{
-    cors: {
-                origin: ["http://localhost:4000/socket.io/"],
-                methods: ["GET", "POST"],
-                credentials: true,
-                transports: ['websocket', 'polling'],
-        },
-        allowEIO3: true
+ const io = require('socket.io')(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
 });
 io.on('connection', socket => {
   socket.on('new data published', function(msg){
+    console.log("listening to server side---------------------");
     io.emit('render', msg);
   });
 })
