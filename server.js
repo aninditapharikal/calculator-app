@@ -1,4 +1,9 @@
 const firebase=require("firebase");
+const cors = require('cors');
+const express = require('express');
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const config=firebase.initializeApp({
   apiKey: "AIzaSyCYiO3qgwY0SRdmt6yBh2LN2O9mfun0SQI",
@@ -9,13 +14,13 @@ const config=firebase.initializeApp({
 const db = config.database();
 const ref = db.ref('data');
 
-const express = require('express');
-const app = express();
-const path = require('path');
-const bodyParser = require('body-parser');
 const port = process.env.PORT || 4000;
 const server = app.listen(port);
 require("dotenv").config();
+
+
+app.use(cors());
+// app.options('*', cors());
 
 //To test 
 app.post('/', (req,res) => {
@@ -24,22 +29,6 @@ app.post('/', (req,res) => {
     res.status(200).send("Suceess..")
 })
 
-var cors = require('cors');
-app.options('*', cors());
-const whitelist = ["http://localhost:3000","http://localhost:4000/","https://app-calculator-anind.herokuapp.com/"]
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions))
 //app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 //WebSocket
  const io = require('socket.io')(server, {
