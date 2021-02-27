@@ -49,7 +49,6 @@ class App extends Component {
         this.setState({ input: substr + val });
         return;
       } else if (val === "*") return;
-
     }
     this.setState({ input: this.state.input + val });
   }
@@ -86,7 +85,7 @@ class App extends Component {
     if (lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/" || lastChar === ".") return;
     try {
       if (!this.state.input) return;
-      value = math.evaluate(this.state.input);
+      value = math.format(math.evaluate(this.state.input));
     } catch (err) {
       value = "Invalid Input";
     }

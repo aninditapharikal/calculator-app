@@ -20,4 +20,6 @@
   width: 400px;
   height: 550px;
   border: 1px solid black;
+  overflow: scroll;
+  overflow-y: hidden;
 }

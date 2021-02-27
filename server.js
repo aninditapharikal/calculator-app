@@ -51,7 +51,6 @@ app.get('/api/data', (req, res) => {
 
 //To save data in Firebase
 app.post(`/api/data`, (req, res) => {
-  console.log(req.body);
   const recordTime = req.body['time']
   const recordVal = req.body['value']
 
@@ -73,4 +72,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-console.log(`Server istening on ${port}`);
+//console.log(`Server istening on ${port}`);
